@@ -79,7 +79,7 @@ for layer in model.children():
         print(param.shape)
     print()
 
-model = model.to(DEVICE)
+model = model.to(DEVICE, non_blocking=True)
 
 for epoch in range(N_EPOCHS):
     model.train()
@@ -91,7 +91,7 @@ for epoch in range(N_EPOCHS):
             tepoch.set_description(f"Epoch {epoch}")
 
             X_batch, y_batch = batch
-            X_batch, y_batch = X_batch.to(DEVICE), y_batch.to(DEVICE)
+            X_batch, y_batch = X_batch.to(DEVICE, non_blocking=True), y_batch.to(DEVICE, non_blocking=True)
 
             y_pred = model(X_batch)
             loss = loss_fn(y_pred, y_batch)
